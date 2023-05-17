@@ -1,7 +1,6 @@
 const express = require('express');
 const { addProduct, editProduct, deleteProduct, getProducts, getSingleProduct } = require('../controllers/productController');
 const { upload } = require('../utils/fileUpload');
-const auth = require('../middlewares/authUser');
 const requireAuth = require('../middlewares/requireAuth'); 
 
 const router = express.Router()
