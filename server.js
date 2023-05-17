@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(cookieParser())
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: process.env.URL,
 };
 app.use(cors(corsOptions))
 
