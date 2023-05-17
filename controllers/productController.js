@@ -2,28 +2,23 @@ const Product = require('../models/productModel');
 const cloudinary = require('cloudinary').v2
 
 
-
-
 const addProduct = async (req, res, next) => {
     const { name, price, discount, desc } = req.body
 
     try {
         if (!name || !price || !discount || !desc) {
-            // res.status(400);
             throw new Error('All fields are required');
         }
 
         let fileData = {}
 
         if (!req.file) {
-            // res.status(400);
             throw new Error('No file was selected');
         }
 
         const uploadedFile = await cloudinary.uploader.upload(req.file.path, { folder: "openFabric", resource_type: "image" })
 
         if (!uploadedFile) {
-            // res.status(500)
             throw new Error("image could not be uploaded")
         }
 
@@ -43,7 +38,6 @@ const addProduct = async (req, res, next) => {
         })
 
         if (!product) { 
-            // res.status(500)
             throw new Error("Product could not be created")
         }
 
@@ -57,8 +51,6 @@ const addProduct = async (req, res, next) => {
 const editProduct = async (req, res, next) => {
     const { name, price, discount, desc } = req.body
     const productId = req.params.id
-
-    console.log(req.file)
 
     try {
         const product = await Product.findById(productId)
@@ -126,7 +118,6 @@ const getSingleProduct = async (req, res, next) => {
         const product = await Product.findOne({_id: productId});
 
         if (!product) {
-            res.status(404)
             throw new Error("Product could not be found");
         }
 
